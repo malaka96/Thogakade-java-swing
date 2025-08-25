@@ -4,8 +4,8 @@
  */
 package icet.icp2025.jdbc.thogaKade.view;
 
-import icet.icp2025.jdbc.thogaKade.controller.CustomerController;
-import icet.icp2025.jdbc.thogaKade.model.Customer;
+import icet.icp2025.jdbc.thogaKade.controller.ItemController;
+import icet.icp2025.jdbc.thogaKade.model.Item;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author pc
  */
-public class ViewCustomerForm extends javax.swing.JFrame {
+public class ViewItemForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewCustomerForm
      */
-    public ViewCustomerForm() {
+    public ViewItemForm() {
         initComponents();
     }
 
@@ -43,7 +43,7 @@ public class ViewCustomerForm extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("View Item Form");
+        jLabel1.setText("View Customer Form");
 
         tblCustomerDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -53,11 +53,11 @@ public class ViewCustomerForm extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "code", "description", "unit price", "quantity"
+                "Customer Id", "Name", "Address", "Salary"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -101,14 +101,14 @@ public class ViewCustomerForm extends javax.swing.JFrame {
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
         try {
             DefaultTableModel dtm=(DefaultTableModel) tblCustomerDetails.getModel();
-            ArrayList<Customer> customerList = CustomerController.getAllCustomers();
+            ArrayList<Item> itemList = ItemController.getAllItems();
             dtm.setRowCount(0);
-            for (Customer customer : customerList) {
-                Object[] rowData={customer.getId(),customer.getName(),customer.getAddress(),customer.getSalary()};
+            for (Item item : itemList) {
+                Object[] rowData={item.getCode(),item.getDescription(),item.getUnitPrice(),item.getQty()};
                 dtm.addRow(rowData);
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ViewCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewItemForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnReloadActionPerformed
 
@@ -129,20 +129,21 @@ public class ViewCustomerForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewCustomerForm().setVisible(true);
+                new ViewItemForm().setVisible(true);
             }
         });
     }
